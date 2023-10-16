@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Add New Property</title>
+    <link rel="stylesheet" href="../static/css/style.css">
+
+</head>
+<body>
+    <!--navigation bar-->
+    <nav>
+        <h1>Propertz</h1>
+        <ul>
+            <li><a href="home.html"><strong>Home |</strong></a></li>
+            <li><a href="reviews.html"><strong>Reviews |</strong></a></li>
+            <li><a href="about.html"><strong>About Us |</strong></a></li>
+            <li><a href="sign up.html"><strong>Sign Up |</strong></a></li>
+            <li><a href="login.html"><strong>Log in |</strong></a></li>
+        </ul>
+    </nav>
+    <br>
+    <center>
+        <div class="head-tag">
+            <link rel="stylesheet" href="style.css">
+        </div>
+    </center>
+    <br>
+    <center>
+    <div class="addform">
+    
+    <form action=""  id="addpropform">   
+    <center>
+    <br>
+    
+
+     <table>
+        
+        <tr>
+            <td><label for="type">Type of Property</label></td>
+           <td>
+               <select name='TypeofLand' id="type">
+                   <option value="Agricultural">Agriculture</option>
+                   <option value="Commercial">Commercial</option>
+                   <option value="Industrial">Industrial</option>
+                   <option value="Residential">Residential</option>
+                </select>
+                </td>
+        </tr>
+        
+        
+        <tr>
+            <td><label for="lotsize">Land Size </label></td>           
+            <td><input type="text" id="lotsize" name="lotsize"></td>
+           
+        </tr>
+        
+    
+        <tr>
+            <td><label for="locality">Location</label></td>
+            <td><input type="text" id="locality" name="locality"></td>
+        </tr>
+        <tr>
+            <td><label for="email">Email ID</label></td>
+            <td><input type="text" id="Email" name="email"></td>
+        </tr>
+    
+        <tr>
+            <td><label for="phone">Phone No</label></td>
+            <td><input type="text" id="phone" name="phone"></td>
+        </tr>
+        <tr>
+            <td><label for="saleprice">Sale Price of Property</label></td>
+            <td><input type="text" id="saleprice" name="saleprice"></td>
+        </tr>
+      </table>
+      
+      
+
+    </center>
+   
+     </form>
+    
+     
+     <button id="Addbtn">Add</button>
+    </div>
+</center>
+
+<script type="module">
+   
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-app.js";
+    
+  
+    const firebaseConfig = {
+      apiKey: "AIzaSyCGDBIL8uCwagPgUDvP0181XoPSfJu95O4",
+      authDomain: "online-property-manageme-6a435.firebaseapp.com",
+      databaseURL: "https://online-property-manageme-6a435-default-rtdb.firebaseio.com",
+      projectId: "online-property-manageme-6a435",
+      storageBucket: "online-property-manageme-6a435.appspot.com",
+      messagingSenderId: "500323407850",
+      appId: "1:500323407850:web:2827214e0048ba7ac14493",
+      measurementId: "G-48HVP4085C"
+    };
+  
+    const app = initializeApp(firebaseConfig);
+   
+
+    import {getDatabase, ref, child, get, set} from "https://www.gstatic.com/firebasejs/10.5.0/firebase-database.js";
+    const db = getDatabase();
+    let type = document.getElementById('type')
+    let lotsize = document.getElementById('lotsize');
+    let locality = document.getElementById('locality');
+    let Email = document.getElementById('Email');
+    let phone = document.getElementById('phone');
+    let saleprice = document.getElementById('saleprice');
+
+    let Addbtn = document.getElementById('Addbtn');
+
+    function AddData(){
+        set(ref(db, 'online property management/' + phone.value),{
+             typeofland: type.value,
+             LotSize: lotsize.value,
+             Locality: locality.value,
+             EmailId: Email.value,
+             PhoneNo: phone.value,
+             SalePrice: saleprice.value,
+        })
+        .then(()=> {
+            alert('Data Added Succesfully');
+        })
+        .catch((error)=>{
+            alert('unsuccessful');
+        })
+    }
+
+    Addbtn.addEventListener('click', AddData);
+  </script>
+
+
+</body>
+</html>
